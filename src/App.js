@@ -1,26 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import 'bulma/css/bulma.css';
+import AuthService from './services/auth-services'
+
+//components
+import Home from './components/Home'
+import Login from './components/auth/Login'
+import Signup from './components/auth/Signup'
+import Profile from './components/workers/Profile'
+import ProtectedRoute from './services/protected-routes'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  const [loggedInUser,setLoggedInUser] = useState(null);
+
+  const service = new AuthService();
+
+  const fetchUser = () => {
+    if(loggedInUser === null) {
+      service.loggedin()
+      .then(res => {
+        setLoggedInUser(res)
+      })
+      .catch( err => {
+        setLoggedInUser(false)
+      })
+    }
+  }
+
+  
+  const getTheUser = (userObj) => {
+    setLoggedInUser(userObj)
+  }
+  
+  fetchUser()
+
+  if(loggedInUser){
+    return (
+      <Router>
+        <Switch>
+          <Route path='/' exact component={Home} />
+          <ProtectedRoute user={loggedInUser} path='/profile' exact component={Profile} />
+        </Switch>
+      </Router>
+    )
+
+  }
+  else{
+    return (
+      <Router>
+        <Switch>
+          <Route path='/' exact component={Home} />
+          <Route path='/workers/login' exact render={()=> <Login getUser={getTheUser}/>} />
+          <Route path='/workers/signup' exact render={()=> <Signup getUser={getTheUser}/>} />
+        </Switch>
+      </Router>
+    )
+  }
 }
 
 export default App;

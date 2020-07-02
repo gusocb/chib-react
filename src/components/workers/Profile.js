@@ -8,8 +8,8 @@ const Profile = (props) => {
   const [singleUser, updateSingleUser] = useState({
     name: "",
     lastName: "",
-    birthday: "",
     phoneNumber: "",
+    birthday: "",
     password: "",
     profession: "",
     jobDescription: "",
@@ -39,6 +39,7 @@ const Profile = (props) => {
       })
       .catch((err) => console.log(err));
   };
+  console.log(typeof singleUser.birthday);
 
   if (!singleUser.profession) {
     return (
@@ -112,29 +113,30 @@ const Profile = (props) => {
   } else {
     return (
       <div className="container">
-        <div class="card">
-          <div class="card-content">
-            <div class="media">
-              <div class="media-left">
-                <figure class="image is-96x96">
+        <div className="card">
+          <div className="card-content">
+            <div className="media">
+              <div className="media-left">
+                <figure className="image is-96x96">
                   <img
                     src="https://bulma.io/images/placeholders/96x96.png"
                     alt="avatar"
                   />
                 </figure>
               </div>
-              <div class="media-content">
-                <p class="title is-3">Bienvenido de vuelta</p>
-                <p class="title is-4">
+              <div className="media-content">
+                <p className="title is-3">Bienvenido de vuelta</p>
+                <p className="title is-4">
                   {singleUser.name} {singleUser.lastName}
                 </p>
-                <p class="subtitle is-5">{singleUser.profession}</p>
+                <p className="title is-5">Cumpleaños: {singleUser.birthday.substr(8,2)}/{singleUser.birthday.substr(5,2)}</p>
+                <p className="subtitle is-5">{singleUser.profession}</p>
               </div>
             </div>
 
-            <div class="content">
+            <div className="content">
               <p>{singleUser.jobDescription}</p>
-              <p className="title is-6">${singleUser.pricePerHour} la hora.</p>
+              <p className="title is-6">${singleUser.pricePerHour} por hora.</p>
             </div>
           </div>
         </div>

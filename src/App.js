@@ -69,6 +69,12 @@ function App() {
             exact
             render={() => <Signup getUser={getTheUser} />}
           />
+          <ProtectedRoute
+            user={loggedInUser}
+            path="/profile"
+            exact
+            component={Profile}
+          />
         </Switch>
       </Router>
     );

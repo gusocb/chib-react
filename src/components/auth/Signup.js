@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import AuthService from "../../services/auth-services";
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Signup = (props) => {
+  const [startDate, setStartDate] = useState('');
   const service = new AuthService();
   const history = useHistory();
   const { register, errors, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
-    const { name, lastName, phoneNumber, birthday, password } = data;
+    const { name, lastName, phoneNumber, password } = data;
+    const birthday = startDate;
     service
       .signup(name, lastName, phoneNumber, birthday, password)
       .then(() => {
@@ -66,14 +70,11 @@ const Signup = (props) => {
         <div className="field">
           <label className="label">Fecha de nacimiento</label>
           <div className="control">
-            <input
-              className="input"
-              type="text"
-              name="birthday"
-              placeholder="tu fecha"
-              ref={register({ required: true })}
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              placeholderText="mm/dd/aaaa"
             />
-            {errors.store && <p className="error-form">Campo requerido</p>}
           </div>
         </div>
 

@@ -7,7 +7,7 @@ const JobList = () => {
 
   const getAllJobs = () => {
     axios
-      .get("http://localhost:5000/api/jobs", { withCredentials: true })
+      .get("https://chib-backend.herokuapp.com/api/jobs", { withCredentials: true })
       .then((res) => updateState(res.data))
       .catch((err) => console.log(err));
   };

@@ -7,7 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const Signup = (props) => {
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState('');
   const service = new AuthService();
   const history = useHistory();
   const { register, errors, handleSubmit } = useForm();
@@ -71,6 +71,7 @@ const Signup = (props) => {
           <label className="label">Fecha de nacimiento</label>
           <div className="control">
             <DatePicker
+              selected={startDate}
               onChange={(date) => setStartDate(date)}
               placeholderText="mm/dd/aaaa"
             />

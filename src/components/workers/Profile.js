@@ -18,7 +18,7 @@ const Profile = (props) => {
 
   const getInfo = () => {
     axios
-      .get("http://localhost:5000/api/profile", { withCredentials: true })
+      .get("https://chib-backend.herokuapp.com/api/profile", { withCredentials: true })
       .then((response) => {
         updateSingleUser(response.data);
       })
@@ -31,7 +31,7 @@ const Profile = (props) => {
 
   const onSubmit = (data) => {
     axios
-      .put("http://localhost:5000/api/profile/edit", data, {
+      .put("https://chib-backend.herokuapp.com/api/profile/edit", data, {
         withCredentials: true,
       })
       .then(() => {

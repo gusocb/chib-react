@@ -1,1 +1,2 @@
-## prueba tecnica chib frontend
+## Frontend
+Aquí se encuentra el código de la aplicación cliente, programada con React. No necesitas ninguna configuración en tu computadora ya que existe un deploy completo y funcional de la app en [https://prueba-tecnica-chib.netlify.app/](https://prueba-tecnica-chib.netlify.app/). El código de las APIs consultadas por la app se encuentra en [https://github.com/gusocb/prueba-tecnica-chib](https://github.com/gusocb/prueba-tecnica-chib)
